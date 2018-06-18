@@ -1,0 +1,317 @@
+package matrizes;
+
+import java.util.Scanner;
+
+public class teste {
+
+	public static void main(String[] args) {
+		/*
+		 * 
+		 */
+
+		String [][] m = {
+				{"| |", "| |", "| |", " A"},
+				{"| |", "| |", "| |", " B"},
+				{"| |", "| |", "| |", " C"},
+				{" 1 ", " 2 ", " 3 ", "  "},
+		};
+		String jog1 = " ", jog2 = " ", jogmais = "s";
+		String coluna = " ", linha = " ";
+		int colt = 0, lint = 0, contjog = 0, player = 1;
+		boolean valido = true, vitoria = false, vit1 = false, vit2 = false;
+
+		Scanner tec = new Scanner (System.in);
+
+		System.out.println("Quem é o Jogador 1?");
+		jog1 = tec.next();
+
+		System.out.println("Quem é o Jogador 2?");
+		jog2 = tec.next();
+
+		System.out.println("");
+
+
+
+		//_______________________________________________________________________________________________
+
+		do { //laço para iniciar novo jogo
+			for (int i = 0; i < m.length; i++) { //impressão do tabuleiro
+				for (int j = 0; j < m[i].length; j++) {
+					System.out.print(m[i][j]);
+				}
+				System.out.println("");
+			}
+
+
+			do { //laço inicio da partida
+
+
+				if (player == 1 && vit2 == false) { //inicio jogada player 1
+					do { //laço para jogada do player 1
+						System.out.println(jog1 + ", escolha uma linha...");
+						linha = tec.next();
+						if (linha.equalsIgnoreCase("a")) {
+							lint = 0;
+						}
+						else {
+							if (linha.equalsIgnoreCase("b")) {
+								lint = 1;
+							}
+							else {
+								if (linha.equalsIgnoreCase("c")) {
+									lint = 2;
+								}
+							}
+						}
+
+						System.out.println(jog1 + ", escolha uma coluna...");
+						coluna = tec.next();
+						System.out.println(" ");
+
+						if (coluna.equalsIgnoreCase("1")) {
+							colt = 0;
+						}
+						else {
+							if (coluna.equalsIgnoreCase("2")) {
+								colt = 1;
+							}
+							else {
+								if (coluna.equalsIgnoreCase("3")) {
+									colt = 2;
+								}
+							}
+						}
+						if (m[lint][colt].equalsIgnoreCase("| |")) {
+							m[lint][colt] = ("|X|");
+							valido = true;
+							coluna = " ";
+							linha = " ";
+							colt = 0;
+							lint = 0;
+
+						}
+						else {
+							System.out.println("Invalido");
+							valido = false;
+						}
+
+
+						// declarações de vitoria player 1
+						//vitorias pela linha
+						if (m[0][0].equals("|X|") && m[0][1].equals("|X|") && m[0][2].equals("|X|")) {
+							vit1 = true;
+						}
+						else {
+							if (m[1][0].equals("|X|") && m[1][1].equals("|X|") && m[1][2].equals("|X|")) {
+								vit1 = true;
+							}
+							else {
+								if (m[2][0].equals("|X|") && m[2][1].equals("|X|") && m[2][2].equals("|X|")) {
+									vit1 = true;
+								}
+								else {
+									//vitorias pela coluna
+									if (m[0][0].equals("|X|") && m[1][0].equals("|X|") && m[2][0].equals("|X|")) {
+										vit1 = true;
+									}
+									else {
+										if (m[0][1].equals("|X|") && m[1][1].equals("|X|") && m[2][1].equals("|X|")) {
+											vit1 = true;
+										}
+										else {
+											if (m[0][2].equals("|X|") && m[1][2].equals("|X|") && m[2][2].equals("|X|")) {
+												vit1 = true;
+											}
+											else {
+												//vitorias pela diagonal
+												if (m[0][0].equals("|X|") && m[1][1].equals("|X|") && m[2][2].equals("|X|")) {
+													vit1 = true;
+												}
+												else {
+													if (m[2][0].equals("|X|") && m[2][0].equals("|X|") && m[1][1].equals("|X|")) {
+														vit1 = true;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						if (vit1 == true) {
+							vitoria = true;
+						}
+					} while (valido == false);
+					contjog = contjog + 1; //contador de jogadas
+					player = 2;
+
+					for (int i = 0; i < m.length; i++) { //impressão do tabuleiro
+						for (int j = 0; j < m[i].length; j++) {
+							System.out.print(m[i][j]);
+						}
+						System.out.println("");
+					}
+					//System.out.println("contador de jogadas: " + contjog);
+					//System.out.println("vitoria player 1: " + vit1);
+				}
+
+				//FIM DA JOGADA DO PLAYER 1			
+				//________________________________________________________________________________________________
+
+
+				if (player == 2 && vit1 == false) { //inicio jogada player 2
+					do { //laço para jogada do player 2
+						System.out.println(jog2 + ", escolha uma linha...");
+						linha = tec.next();
+						if (linha.equalsIgnoreCase("a")) {
+							lint = 0;
+						}
+						else {
+							if (linha.equalsIgnoreCase("b")) {
+								lint = 1;
+							}
+							else {
+								if (linha.equalsIgnoreCase("c")) {
+									lint = 2;
+								}
+							}
+						}
+
+						System.out.println(jog2 + ", escolha uma coluna...");
+						coluna = tec.next();
+						System.out.println(" ");
+
+						if (coluna.equals("1")) {
+							colt = 0;
+						}
+						else {
+							if (coluna.equals("2")) {
+								colt = 1;
+							}
+							else {
+								if (coluna.equals("3")) {
+									colt = 2;
+								}
+							}
+						}
+						if (m[lint][colt].equalsIgnoreCase("| |")) {
+							m[lint][colt] = ("|O|");
+							valido = true;
+							coluna = " ";
+							linha = " ";
+							colt = 0;
+							lint = 0;
+
+						}
+						else {
+							System.out.println("Invalido");
+							valido = false;
+						}
+
+
+						// declarações de vitoria player 2
+						//vitorias pela linha
+						if (m[0][0].equals("|O|") && m[0][1].equals("|O|") && m[0][2].equals("|O|")) {
+							vit2 = true;
+						}
+						else {
+							if (m[1][0].equals("|O|") && m[1][1].equals("|O|") && m[1][2].equals("|O|")) {
+								vit2 = true;
+							}
+							else {
+								if (m[2][0].equals("|O|") && m[2][1].equals("|O|") && m[2][2].equals("|O|")) {
+									vit2 = true;
+								}
+								else {
+									//vitorias pela coluna
+									if (m[0][0].equals("|O|") && m[1][0].equals("|O|") && m[2][0].equals("|O|")) {
+										vit2 = true;
+									}
+									else {
+										if (m[0][1].equals("|O|") && m[1][1].equals("|O|") && m[2][1].equals("|O|")) {
+											vit2 = true;
+										}
+										else {
+											if (m[0][2].equals("|O|") && m[1][2].equals("|O|") && m[2][2].equals("|O|")) {
+												vit2 = true;
+											}
+											else {
+												//vitorias pela diagonal
+												if (m[0][0].equals("|O|") && m[1][1].equals("|O|") && m[2][2].equals("|O|")) {
+													vit2 = true;
+												}
+												else {
+													if (m[2][0].equals("|O|") && m[1][1].equals("|O|") && m[0][2].equals("|O|")) {
+														vit2 = true;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						if (vit2 == true) {
+							vitoria = true;
+						}
+					} while (valido == false);
+					contjog = contjog + 1; //contador de jogadas
+					player = 1;
+
+
+					for (int i = 0; i < m.length; i++) { //impressão do tabuleiro
+						for (int j = 0; j < m[i].length; j++) {
+							System.out.print(m[i][j]);
+						}
+						System.out.println("");
+					}
+					//System.out.println("contador de jogadas: " + contjog);
+					//System.out.println("vitoria player 2: " + vit2);
+
+				}
+				//FIM DA JOGADA DO PLAYER 2
+				//___________________________________________________________________________________________________________				
+			}	
+			while (vitoria == false && contjog < 10); //fim do laço da partida (por vitoria ou empate)
+
+			if (vitoria == true) { //declaração do resultado da partida
+				System.out.println("O vencedor foi: ");
+				
+				if (vit1 == true) {
+					System.out.println(jog1);
+				}
+				else {
+					System.out.println(jog2);
+				}
+			}
+			else {
+				if (vitoria  == false & contjog == 9)
+					System.out.println("Jogo empatado!");
+			}
+
+			vitoria = false; //zerando as variáveis
+			vit1 = false;
+			vit2 = false;
+			player = 1;
+			valido = true;
+			contjog = 0;
+			coluna = " ";
+			linha = " ";
+			colt = 0;
+			lint = 0;
+
+			for (int i = 0; i <= (m.length - 2); i++) { //zerando o tabuleiro
+				for (int j = 0; j <= (m[i].length - 2); j++) {
+					m[i][j] = "| |";
+				}
+			}
+
+			System.out.println("Jogar novamente? (S / N)");
+			jogmais = tec.next();
+
+		} while (jogmais.equalsIgnoreCase("S")); //fim do laço para iniciar novo jogo
+
+
+	}
+
+}
